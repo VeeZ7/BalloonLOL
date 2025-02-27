@@ -1,0 +1,227 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Background Image -->
+    <ImageView
+        android:id="@+id/background_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/background" />
+
+    <!-- Menu Bar -->
+    <ImageView
+        android:id="@+id/menu_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/menu_bar_1"
+        android:scaleType="fitXY"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Balloon Selection Grid -->
+    <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/balloon_grid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="16dp"
+        android:layout_marginTop="16dp"
+        app:columnCount="3"
+        app:layout_constraintTop_toBottomOf="@id/menu_bar"
+        app:layout_constraintBottom_toTopOf="@id/continue_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:rowCount="3">
+
+        <!-- Balloon Buttons -->
+        <FrameLayout
+            android:id="@+id/button_unicorn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/card_base_not_selected_new"
+                android:scaleType="fitXY" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_launcher_foreground"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/price_not_selected_new"
+                android:layout_gravity="bottom|end"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="15dp" />
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:id="@+id/button_ariel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/card_base_not_selected_new"
+                android:scaleType="fitXY" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_launcher_foreground"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/unicorn_not_selected_new"
+                android:layout_gravity="top|end"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/price_not_selected_new"
+                android:layout_gravity="bottom|end"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="15dp" />
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:id="@+id/button_goodboy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/card_base_not_selected_new"
+                android:scaleType="fitXY" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_launcher_foreground"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/unicorn_not_selected_new"
+                android:layout_gravity="top|end"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/price_not_selected_new"
+                android:layout_gravity="bottom|end"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="15dp" />
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:id="@+id/button_loveu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/card_base_not_selected_new"
+                android:scaleType="fitXY" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_launcher_foreground"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/unicorn_not_selected_new"
+                android:layout_gravity="top|end"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/price_not_selected_new"
+                android:layout_gravity="bottom|end"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="15dp" />
+        </FrameLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/unicorn_not_selected_new"
+            app:layout_column="0"
+            app:layout_row="0" />
+
+
+    </androidx.gridlayout.widget.GridLayout>
+
+    <!-- Back Button -->
+    <ImageView
+        android:id="@+id/back_button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/back_button"
+        android:layout_margin="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <!-- Continue Button -->
+    <ImageView
+        android:id="@+id/continue_button"
+        android:layout_width="303dp"
+        android:layout_height="82dp"
+        android:layout_margin="70dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/button_continue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
