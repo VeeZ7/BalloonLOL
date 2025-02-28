@@ -1,198 +1,222 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
 
-    <!-- Background Image -->
-    <ImageView
-        android:id="@+id/imgBackground"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/background" />
-
-    <!-- Header -->
+    <!-- Top menu bar (already includes "Choose balloon" and "Payment" text) -->
     <ImageView
         android:id="@+id/menu_bar"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:src="@drawable/menu_bar_2_payment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
         android:scaleType="fitXY"
+        android:src="@drawable/menu_bar_2_payment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Back button (positioned first to ensure it's visible) -->
     <ImageView
-        android:id="@+id/imgHeaderPayment"
+        android:id="@+id/back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/text_payment" />
-
-    <!-- Left Card: Selected Items -->
-
-    <ImageView
-        android:id="@+id/imgLeftCardBackground"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:src="@drawable/payment_card_balloon" />
-
-    <ImageView
-        android:id="@+id/imgUnicorn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@id/imgLeftCardBackground"
-        android:layout_alignTop="@id/imgLeftCardBackground"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/ic_launcher_foreground" />
-
-    <ImageView
-        android:id="@+id/imgTotalText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/imgUnicorn"
-        android:layout_alignStart="@id/imgLeftCardBackground"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/text_total" />
-
-    <ImageView
-        android:id="@+id/imgAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/imgUnicorn"
-        android:layout_toEndOf="@id/imgTotalText"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/text_40_dollars" />
-
-    <ImageView
-        android:id="@+id/imgUnicornText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/imgTotalText"
-        android:layout_alignStart="@id/imgTotalText"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/text_unicorn" />
-
-    <ImageView
-        android:id="@+id/imgUnicornCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/imgTotalText"
-        android:layout_alignEnd="@id/imgLeftCardBackground"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/text_x2" />
-
-    <ImageView
-        android:id="@+id/imgGoodBoyText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/imgUnicornText"
-        android:layout_alignStart="@id/imgUnicornText"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/text_good_boy" />
-
-    <ImageView
-        android:id="@+id/imgGoodBoyCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/imgUnicornCount"
-        android:layout_alignEnd="@id/imgUnicornCount"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/text_x1" />
-
-    <ImageView
-        android:id="@+id/imgDinoText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/imgGoodBoyText"
-        android:layout_alignStart="@id/imgGoodBoyText"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/text_dino" />
-
-    <ImageView
-        android:id="@+id/imgDinoCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/imgGoodBoyCount"
-        android:layout_alignEnd="@id/imgGoodBoyCount"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/text_x1" />
-
-    <!-- Right Card: Payment Method -->
-
-    <ImageView
-        android:id="@+id/imgRightCardBackground"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="-18dp"
-        android:src="@drawable/background_payment" />
-
-    <ImageView
-        android:id="@+id/imgSelectPaymentText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@id/imgRightCardBackground"
-        android:layout_alignTop="@id/imgRightCardBackground"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/select_payment_method" />
-
-    <!-- Payment Options -->
-    <ImageView
-        android:id="@+id/imgCreditCardOption"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/imgSelectPaymentText"
-        android:layout_alignStart="@id/imgRightCardBackground"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="30dp"
-        android:src="@drawable/credit_card" />
-
-    <ImageView
-        android:id="@+id/imgCoinOption"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/imgSelectPaymentText"
-        android:layout_alignTop="@+id/imgCreditCardOption"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/coin" />
-
-    <ImageView
-        android:id="@+id/imgCashOption"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/imgSelectPaymentText"
-        android:layout_alignTop="@+id/imgCreditCardOption"
-        android:layout_alignEnd="@id/imgRightCardBackground"
-        android:layout_marginEnd="20dp"
-        android:src="@drawable/cash" />
-
-    <ImageView
-        android:id="@+id/imgSuccessText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/imgCreditCardOption"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:src="@drawable/payment_successful" />
-
-    <!-- Back Button -->
-    <ImageView
-        android:id="@+id/imgBackButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="20dp"
-        android:src="@drawable/back_button_2" />
+        android:src="@drawable/back_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-</RelativeLayout>
+    <!-- Main content container with bottom margin to accommodate back button -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/content_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menu_bar">
+
+    <!-- Left Card with balloon selection (narrower, more vertical) -->
+    <ImageView
+        android:id="@+id/card_base_left"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/card_base"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="3:5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.3" />
+
+    <!-- Unicorn Image -->
+
+        <!-- Total Amount -->
+
+        <!-- Item List -->
+        <ImageView
+            android:id="@+id/unicorn_image"
+            android:layout_width="184dp"
+            android:layout_height="88dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="16dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_launcher_foreground"
+            app:layout_constraintEnd_toEndOf="@+id/card_base_left"
+            app:layout_constraintHeight_percent="0.2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/card_base_left"
+            app:layout_constraintTop_toTopOf="@+id/card_base_left" />
+
+        <ImageView
+            android:id="@+id/total_amount"
+            android:layout_width="89dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/price_selected_new"
+            app:layout_constraintEnd_toEndOf="@+id/card_base_left"
+            app:layout_constraintHorizontal_bias="0.462"
+            app:layout_constraintStart_toStartOf="@+id/card_base_left"
+            app:layout_constraintTop_toBottomOf="@+id/unicorn_image" />
+
+        <LinearLayout
+        android:id="@+id/item_list"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/card_base_left"
+        app:layout_constraintStart_toStartOf="@+id/card_base_left"
+        app:layout_constraintTop_toBottomOf="@+id/total_amount">
+
+            <ImageView
+                android:id="@+id/unicorn_item"
+                android:layout_width="104dp"
+                android:layout_height="14dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/unicorn_not_selected" />
+
+            <ImageView
+                android:id="@+id/good_boy_item"
+                android:layout_width="109dp"
+                android:layout_height="14dp"
+                android:layout_marginTop="4dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/goodboy_not_selected_new" />
+
+            <ImageView
+                android:id="@+id/dino_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/dino_not_selected_new" />
+    </LinearLayout>
+
+    <!-- Right Card with payment methods (wider) -->
+    <ImageView
+        android:id="@+id/payment_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/background_payment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/card_base_left"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Select your payment method text -->
+    <ImageView
+        android:id="@+id/select_payment_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/select_payment_method"
+        app:layout_constraintEnd_toEndOf="@+id/payment_background"
+        app:layout_constraintStart_toStartOf="@+id/payment_background"
+        app:layout_constraintTop_toTopOf="@+id/payment_background" />
+
+    <!-- Payment Methods Container -->
+    <LinearLayout
+        android:id="@+id/payment_methods_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        app:layout_constraintEnd_toEndOf="@+id/payment_background"
+        app:layout_constraintStart_toStartOf="@+id/payment_background"
+        app:layout_constraintTop_toBottomOf="@+id/select_payment_text">
+
+        <!-- Credit Card Option -->
+        <FrameLayout
+            android:layout_width="8dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <ImageView
+                android:id="@+id/credit_card_option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:padding="8dp"
+                android:src="@drawable/credit_card" />
+        </FrameLayout>
+
+        <!-- Coin Option -->
+        <FrameLayout
+            android:layout_width="8dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <ImageView
+                android:id="@+id/coin_option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:padding="8dp"
+                android:src="@drawable/coin" />
+        </FrameLayout>
+
+        <!-- Cash Option -->
+        <FrameLayout
+            android:layout_width="8dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+            <ImageView
+                android:id="@+id/cash_option"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:padding="8dp"
+                android:src="@drawable/cash" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- Payment Successful Message -->
+        <ImageView
+            android:id="@+id/payment_successful"
+            android:layout_width="507dp"
+            android:layout_height="22dp"
+            android:src="@drawable/payment_successful"
+            app:layout_constraintEnd_toEndOf="@+id/payment_background"
+            app:layout_constraintStart_toStartOf="@+id/payment_background"
+            app:layout_constraintTop_toBottomOf="@+id/payment_methods_container" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>

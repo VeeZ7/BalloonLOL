@@ -1,0 +1,22 @@
+{
+  "selections": [
+    {
+      "id": "unicorn",
+      "name": "Unicorn Balloon",
+      "price": 5.0,
+      "timestamp": 1708675493000
+    },
+    {
+      "id": "dino",
+      "name": "Dino Balloon",
+      "price": 5.0,
+      "timestamp": 1708675596000
+    },
+    {
+      "id": "bday",
+      "name": "Birthday Joy Balloon",
+      "price": 5.0,
+      "timestamp": 1708675823000
+    }
+  ]
+}
