@@ -1,12 +1,17 @@
 package com.example.balloonbot; // Replace with your actual package name
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.VideoView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class BalloonSelection extends AppCompatActivity implements View.OnClickListener {
@@ -117,7 +122,7 @@ public class BalloonSelection extends AppCompatActivity implements View.OnClickL
         }
         // Handle navigation
         else if (viewId == R.id.back_button) {
-            onBackPressed();
+            navigateToVideoActivity();
         } else if (viewId == R.id.continue_button) {
             proceedToNextStep();
         }
@@ -130,7 +135,7 @@ public class BalloonSelection extends AppCompatActivity implements View.OnClickL
         // Then, set the selected container to selected state
         if (selectedContainer == unicornContainer) {
             // Update unicorn card to selected state
-            unicornCardBg.setBackgroundResource(R.drawable.card_base_selected_new);
+            unicornCardBg.setImageResource(R.drawable.card_base_selected_new);
             unicornName.setImageResource(R.drawable.unicorn_selected_new);
             unicornPrice.setImageResource(R.drawable.price_selected_new);
         } else if (selectedContainer == arielContainer) {
@@ -207,13 +212,51 @@ public class BalloonSelection extends AppCompatActivity implements View.OnClickL
             // Get selected balloon type
             String selectedBalloonType = getSelectedBalloonType();
 
+            showFinishVideo(selectedBalloonType);
+
             // You can pass this information to the next activity or handle it as needed
             // For example:
-            Intent intent = new Intent(BalloonSelection.this, PaymentActivity.class);
-            intent.putExtra("SELECTED_BALLOON", selectedBalloonType);
-            startActivity(intent);
+//            Intent intent = new Intent(BalloonSelection.this, PaymentActivity.class);
+//            intent.putExtra("SELECTED_BALLOON", selectedBalloonType);
+//            startActivity(intent);
         }
     }
+
+
+    private void showFinishVideo(final String selectedBalloonType) {
+        // Create a dialog to show the video
+        final Dialog videoDialog = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        videoDialog.setContentView(R.layout.video_dialog);
+        videoDialog.setCancelable(false);
+
+        // Get the VideoView from the dialog layout
+        VideoView videoView = videoDialog.findViewById(R.id.video_view);
+
+        // Set the video path - assuming the video is in the raw folder
+        String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.finish_screen;
+        videoView.setVideoURI(Uri.parse(videoPath));
+
+        // Set completion listener to go to PaymentActivity when video ends
+        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                // Dismiss the dialog
+                videoDialog.dismiss();
+
+                // Navigate to PaymentActivity
+                Intent intent = new Intent(BalloonSelection.this, PaymentActivity.class);
+                intent.putExtra("SELECTED_BALLOON", selectedBalloonType);
+                startActivity(intent);
+            }
+        });
+
+        // Start playing the video
+        videoView.start();
+
+        // Show the dialog
+        videoDialog.show();
+    }
+
 
     private String getSelectedBalloonType() {
         if (currentlySelected == unicornContainer) {
@@ -230,5 +273,10 @@ public class BalloonSelection extends AppCompatActivity implements View.OnClickL
             return "bday";
         }
         return "";
+    }
+
+    private void navigateToVideoActivity() {
+        Intent intent = new Intent(BalloonSelection.this, VideoActivity.class);
+        startActivity(intent);
     }
 }
