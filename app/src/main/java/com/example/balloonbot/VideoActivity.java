@@ -6,84 +6,90 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.VideoView;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class VideoActivity extends AppCompatActivity {
 
-    private VideoView videoView;
+    private CustomVideo customVideo;
+    private boolean isTouched = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.video);
 
-        // Hide the status bar for a more immersive experience
+        // Hide status bar and navigation bar for immersive experience
         View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         decorView.setSystemUiVisibility(uiOptions);
 
-        // Initialize VideoView
-        videoView = findViewById(R.id.splash_video_view);
+        // Initialize custom customVideo
+        customVideo = findViewById(R.id.start_video);
 
-        // Set the path to your video file
+        // Set the video path (from raw folder)
         String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.start_video;
-        Uri uri = Uri.parse(videoPath);
-        videoView.setVideoURI(uri);
+        customVideo.setVideoURI(Uri.parse(videoPath));
 
         // Start playing the video
-        videoView.start();
+        customVideo.start();
 
-        // Handle video completion - automatically go to BalloonSelection
-        videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+        // Set a listener for when the video completes
+        customVideo.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
                 navigateToBalloonSelection();
             }
         });
 
-        // Set up touch listener to handle any touch on the screen
-        videoView.setOnTouchListener(new View.OnTouchListener() {
+        // Set up touch listener to detect user interaction
+        customVideo.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    // User touched the screen, go to BalloonSelection
-                    navigateToBalloonSelection();
-                    return true;
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (isTouched) return false;  // Prevent repeat action
+
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    customVideo.seekTo(customVideo.getDuration());
+                    isTouched = true;  // Mark that the touch event has been handled
                 }
-                return false;
+                view.performClick();  // Ensure accessibility
+                return true;
             }
         });
     }
 
     private void navigateToBalloonSelection() {
-        // Stop the video if it's playing
-        if (videoView.isPlaying()) {
-            videoView.stopPlayback();
+        // Stop the video if it's still playing
+        if (customVideo.isPlaying()) {
+            customVideo.stopPlayback();
         }
 
         // Navigate to BalloonSelection activity
         Intent intent = new Intent(VideoActivity.this, BalloonSelection.class);
         startActivity(intent);
-        finish(); // Close this activity so user can't navigate back to it
+        finish(); // Close this activity so user can't navigate back
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        // Pause the video if it's playing when the activity goes to background
-        if (videoView.isPlaying()) {
-            videoView.pause();
+        if (customVideo.isPlaying()) {
+            customVideo.pause();
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        // Resume the video if it was playing before
-        if (!videoView.isPlaying()) {
-            videoView.start();
+        if (!customVideo.isPlaying()) {
+            customVideo.start();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (customVideo != null) {
+            customVideo.stopPlayback();
         }
     }
 }

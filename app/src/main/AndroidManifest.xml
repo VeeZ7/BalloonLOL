@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
 
-        <!-- Add BalloonSelectionActivity -->
+        <!-- Add BalloonSelection -->
         <activity
             android:name=".BalloonSelection"
             android:exported="false" />

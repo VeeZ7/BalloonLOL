@@ -1,294 +1,234 @@
-package com.example.balloonbot;
+package com.example.balloonbot; // Replace with your actual package name
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
-
+import android.widget.RelativeLayout;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+public class BalloonSelection extends AppCompatActivity implements View.OnClickListener {
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+    // Declare variables for all the balloon containers and their components
+    private FrameLayout unicornContainer, arielContainer, goodboyContainer;
+    private FrameLayout loveuContainer, dinoContainer, bdayContainer;
 
-public class BalloonSelection extends AppCompatActivity {
+    // Card backgrounds
+    private ImageView unicornCardBg, arielCardBg, goodboyCardBg;
+    private ImageView loveuCardBg, dinoCardBg, bdayCardBg;
 
-    private static final String TAG = "BalloonSelection";
-    private static final String BALLOON_SELECTION_FILE = "balloon_selections.json";
+    // Name labels
+    private ImageView unicornName, arielName, goodboyName;
+    private ImageView loveuName, dinoName, bdayName;
 
-    // Selected balloon
-    private String selectedBalloonId = null;
+    // Price labels
+    private ImageView unicornPrice, arielPrice, goodboyPrice;
+    private ImageView loveuPrice, dinoPrice, bdayPrice;
 
-    // Map to store balloon information
-    private Map<String, BalloonInfo> balloonInfoMap = new HashMap<>();
+    // Navigation buttons
+    private ImageButton backButton, continueButton;
 
-    // UI elements
-    private ImageButton continueButton;
-    private ImageButton backButton;
-
-    // Track selection state for visual feedback
-    private ImageView lastSelectedCardBg = null;
+    // Track currently selected balloon
+    private FrameLayout currentlySelected = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.balloon_selection);
 
-        // Initialize balloon information
-        initializeBalloonInfo();
+        // Initialize views
+        initializeViews();
 
-        // Set up buttons
-        setupButtons();
-
-        // Load any previous selections
-        loadSelections();
+        // Set click listeners
+        setClickListeners();
     }
 
-    private void initializeBalloonInfo() {
-        // Adding information for each balloon
-        balloonInfoMap.put("unicorn", new BalloonInfo(
-                "unicorn",
-                "Unicorn Balloon",
-                5.00,
-                R.drawable.ic_launcher_foreground,
-                R.drawable.unicorn_selected_new,
-                R.drawable.price_selected_new));
+    private void initializeViews() {
+        // Initialize containers
+        unicornContainer = findViewById(R.id.unicorn_container);
+        arielContainer = findViewById(R.id.ariel_container);
+        goodboyContainer = findViewById(R.id.goodboy_container);
+        loveuContainer = findViewById(R.id.loveu_container);
+        dinoContainer = findViewById(R.id.dino_container);
+        bdayContainer = findViewById(R.id.bday_container);
 
-        balloonInfoMap.put("ariel", new BalloonInfo(
-                "ariel",
-                "Ariel Balloon",
-                5.00,
-                R.drawable.ic_launcher_foreground,
-                R.drawable.ariel_selected_new,
-                R.drawable.price_selected_new));
+        // Initialize card backgrounds
+        unicornCardBg = findViewById(R.id.unicorn_card_bg);
+        arielCardBg = findViewById(R.id.ariel_card_bg);
+        goodboyCardBg = findViewById(R.id.goodboy_card_bg);
+        loveuCardBg = findViewById(R.id.loveu_card_bg);
+        dinoCardBg = findViewById(R.id.dino_card_bg);
+        bdayCardBg = findViewById(R.id.bday_card_bg);
 
-        balloonInfoMap.put("goodboy", new BalloonInfo(
-                "goodboy",
-                "Good Boy Balloon",
-                5.00,
-                R.drawable.ic_launcher_foreground,
-                R.drawable.goodboy_selected_new,
-                R.drawable.price_selected_new));
+        // Initialize name labels
+        unicornName = findViewById(R.id.unicorn_name);
+        arielName = findViewById(R.id.ariel_name);
+        goodboyName = findViewById(R.id.goodboy_name);
+        loveuName = findViewById(R.id.loveu_name);
+        dinoName = findViewById(R.id.dino_name);
+        bdayName = findViewById(R.id.bday_name);
 
-        balloonInfoMap.put("loveu", new BalloonInfo(
-                "loveu",
-                "Love U Balloon",
-                5.00,
-                R.drawable.ic_launcher_foreground,
-                R.drawable.loveu_selected_new,
-                R.drawable.price_selected_new));
+        // Initialize price labels
+        unicornPrice = findViewById(R.id.unicorn_price);
+        arielPrice = findViewById(R.id.ariel_price);
+        goodboyPrice = findViewById(R.id.goodboy_price);
+        loveuPrice = findViewById(R.id.loveu_price);
+        dinoPrice = findViewById(R.id.dino_price);
+        bdayPrice = findViewById(R.id.bday_price);
 
-        balloonInfoMap.put("dino", new BalloonInfo(
-                "dino",
-                "Dino Balloon",
-                5.00,
-                R.drawable.ic_launcher_foreground,
-                R.drawable.dino_selected_new,
-                R.drawable.price_selected_new));
-
-        balloonInfoMap.put("bday", new BalloonInfo(
-                "bday",
-                "Birthday Joy Balloon",
-                5.00,
-                R.drawable.ic_launcher_foreground,
-                R.drawable.bdayjoy_selected_new,
-                R.drawable.price_selected_new));
-    }
-
-    private void setupButtons() {
-        // Navigation buttons
-        continueButton = findViewById(R.id.continue_button);
+        // Initialize navigation buttons
         backButton = findViewById(R.id.back_button);
+        continueButton = findViewById(R.id.continue_button);
+    }
+
+    private void setClickListeners() {
+        // Set click listeners for all balloon containers
+        unicornContainer.setOnClickListener(this);
+        arielContainer.setOnClickListener(this);
+        goodboyContainer.setOnClickListener(this);
+        loveuContainer.setOnClickListener(this);
+        dinoContainer.setOnClickListener(this);
+        bdayContainer.setOnClickListener(this);
 
         // Set click listeners for navigation buttons
-        continueButton.setOnClickListener(v -> {
-            if (selectedBalloonId != null) {
-                saveSelection();
-                // Navigate to next screen
-                // Intent intent = new Intent(BalloonSelectionActivity.this, NextActivity.class);
-                // startActivity(intent);
-
-                Intent intent = new Intent(BalloonSelection.this, PaymentActivity.class);
-
-                // Optional: Pass any data needed in the payment screen
-                intent.putExtra("SELECTED_BALLOON_ID", selectedBalloonId);
-                Toast.makeText(this, "Selection saved: " + selectedBalloonId, Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "Please select a balloon first", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        backButton.setOnClickListener(v -> {
-            // Go back to previous screen
-            finish();
-        });
-
-        // Balloon selection buttons
-        setupBalloonButton("unicorn", R.id.unicorn_button, R.id.unicorn_card_bg);
-        setupBalloonButton("ariel", R.id.ariel_button, R.id.ariel_card_bg);
-        setupBalloonButton("goodboy", R.id.goodboy_button, R.id.goodboy_card_bg);
-        setupBalloonButton("loveu", R.id.loveu_button, R.id.loveu_card_bg);
-        setupBalloonButton("dino", R.id.dino_button, R.id.dino_card_bg);
-        setupBalloonButton("bday", R.id.bday_button, R.id.bday_card_bg);
+        backButton.setOnClickListener(this);
+        continueButton.setOnClickListener(this);
     }
 
-    private void setupBalloonButton(String balloonId, int buttonId, int cardBgId) {
-        ConstraintLayout button = findViewById(buttonId);
-        ImageView cardBg = findViewById(cardBgId);
+    @Override
+    public void onClick(View view) {
+        int viewId = view.getId();
 
-        button.setOnClickListener(v -> {
-            // Update selected balloon
-            selectedBalloonId = balloonId;
-
-            // Visual feedback for selection
-            updateSelectionVisuals(cardBg);
-
-            // Show toast with selection
-            Toast.makeText(this,
-                    "Selected: " + balloonInfoMap.get(balloonId).name,
-                    Toast.LENGTH_SHORT).show();
-        });
-    }
-
-    private void updateSelectionVisuals(ImageView cardBg) {
-        // Reset previous selection
-        if (lastSelectedCardBg != null) {
-            lastSelectedCardBg.setImageResource(R.drawable.card_base_not_selected_new);
+        // Handle balloon selection
+        if (viewId == R.id.unicorn_container) {
+            selectBalloon(unicornContainer);
+        } else if (viewId == R.id.ariel_container) {
+            selectBalloon(arielContainer);
+        } else if (viewId == R.id.goodboy_container) {
+            selectBalloon(goodboyContainer);
+        } else if (viewId == R.id.loveu_container) {
+            selectBalloon(loveuContainer);
+        } else if (viewId == R.id.dino_container) {
+            selectBalloon(dinoContainer);
+        } else if (viewId == R.id.bday_container) {
+            selectBalloon(bdayContainer);
         }
-
-        // Highlight new selection using your existing image resource
-        cardBg.setImageResource(R.drawable.card_base_selected_new);
-        lastSelectedCardBg = cardBg;
-    }
-
-    private void saveSelection() {
-        if (selectedBalloonId == null) return;
-
-        try {
-            // Create or load existing JSON file
-            JSONObject mainObject;
-            File file = new File(getFilesDir(), BALLOON_SELECTION_FILE);
-
-            if (file.exists()) {
-                String jsonContent = readFromFile(BALLOON_SELECTION_FILE);
-                mainObject = new JSONObject(jsonContent);
-            } else {
-                mainObject = new JSONObject();
-                mainObject.put("selections", new JSONArray());
-            }
-
-            // Get the selections array
-            JSONArray selections = mainObject.getJSONArray("selections");
-
-            // Create a new selection object
-            JSONObject newSelection = new JSONObject();
-            BalloonInfo selected = balloonInfoMap.get(selectedBalloonId);
-
-            newSelection.put("id", selected.id);
-            newSelection.put("name", selected.name);
-            newSelection.put("price", selected.price);
-            newSelection.put("timestamp", System.currentTimeMillis());
-
-            // Add to selections
-            selections.put(newSelection);
-
-            // Update the main object
-            mainObject.put("selections", selections);
-
-            // Write to file
-            writeToFile(BALLOON_SELECTION_FILE, mainObject.toString());
-
-            Log.d(TAG, "Selection saved: " + selectedBalloonId);
-
-        } catch (JSONException e) {
-            Log.e(TAG, "Error saving selection", e);
+        // Handle navigation
+        else if (viewId == R.id.back_button) {
+            onBackPressed();
+        } else if (viewId == R.id.continue_button) {
+            proceedToNextStep();
         }
     }
 
-    private void loadSelections() {
-        try {
-            File file = new File(getFilesDir(), BALLOON_SELECTION_FILE);
-            if (!file.exists()) return;
+    private void selectBalloon(FrameLayout selectedContainer) {
+        // First, reset all containers to unselected state
+        resetAllToUnselected();
 
-            String jsonContent = readFromFile(BALLOON_SELECTION_FILE);
-            JSONObject mainObject = new JSONObject(jsonContent);
-            JSONArray selections = mainObject.getJSONArray("selections");
+        // Then, set the selected container to selected state
+        if (selectedContainer == unicornContainer) {
+            // Update unicorn card to selected state
+            unicornCardBg.setBackgroundResource(R.drawable.card_base_selected_new);
+            unicornName.setImageResource(R.drawable.unicorn_selected_new);
+            unicornPrice.setImageResource(R.drawable.price_selected_new);
+        } else if (selectedContainer == arielContainer) {
+            // Update ariel card to selected state
+            arielCardBg.setImageResource(R.drawable.card_base_selected_new);
+            arielName.setImageResource(R.drawable.ariel_selected_new);
+            arielPrice.setImageResource(R.drawable.price_selected_new);
+        } else if (selectedContainer == goodboyContainer) {
+            // Update goodboy card to selected state
+            goodboyCardBg.setImageResource(R.drawable.card_base_selected_new);
+            goodboyName.setImageResource(R.drawable.goodboy_selected_new);
+            goodboyPrice.setImageResource(R.drawable.price_selected_new);
+        } else if (selectedContainer == loveuContainer) {
+            // Update loveu card to selected state
+            loveuCardBg.setImageResource(R.drawable.card_base_selected_new);
+            loveuName.setImageResource(R.drawable.loveu_selected_new);
+            loveuPrice.setImageResource(R.drawable.price_selected_new);
+        } else if (selectedContainer == dinoContainer) {
+            // Update dino card to selected state
+            dinoCardBg.setImageResource(R.drawable.card_base_selected_new);
+            dinoName.setImageResource(R.drawable.dino_selected_new);
+            dinoPrice.setImageResource(R.drawable.price_selected_new);
+        } else if (selectedContainer == bdayContainer) {
+            // Update bday card to selected state
+            bdayCardBg.setImageResource(R.drawable.card_base_selected_new);
+            bdayName.setImageResource(R.drawable.bdayjoy_selected_new);
+            bdayPrice.setImageResource(R.drawable.price_selected_new);
+        }
 
-            // Just load the most recent selection if any
-            if (selections.length() > 0) {
-                JSONObject lastSelection = selections.getJSONObject(selections.length() - 1);
-                String lastBalloonId = lastSelection.getString("id");
+        // Update the currently selected container
+        currentlySelected = selectedContainer;
 
-                // Set as current selection
-                selectedBalloonId = lastBalloonId;
+        // Enable continue button since a selection has been made
+        continueButton.setEnabled(true);
+    }
 
-                // Visual update
-                String viewIdName = lastBalloonId + "_card_bg";
-                int resId = getResources().getIdentifier(viewIdName, "id", getPackageName());
-                if (resId != 0) {
-                    ImageView cardBg = findViewById(resId);
-                    updateSelectionVisuals(cardBg);
-                }
+    private void resetAllToUnselected() {
+        // Reset all cards to unselected state
 
-                Log.d(TAG, "Loaded previous selection: " + lastBalloonId);
-            }
+        // Unicorn
+        unicornCardBg.setBackgroundResource(R.drawable.card_base_not_selected_new);
+        unicornName.setImageResource(R.drawable.unicorn_not_selected_new);
+        unicornPrice.setImageResource(R.drawable.price_not_selected_new);
 
-        } catch (JSONException e) {
-            Log.e(TAG, "Error loading selections", e);
+        // Ariel
+        arielCardBg.setImageResource(R.drawable.card_base_not_selected_new);
+        arielName.setImageResource(R.drawable.ariel_not_selected_new);
+        arielPrice.setImageResource(R.drawable.price_not_selected_new);
+
+        // Good Boy
+        goodboyCardBg.setImageResource(R.drawable.card_base_not_selected_new);
+        goodboyName.setImageResource(R.drawable.goodboy_not_selected_new);
+        goodboyPrice.setImageResource(R.drawable.price_not_selected_new);
+
+        // Love U
+        loveuCardBg.setImageResource(R.drawable.card_base_not_selected_new);
+        loveuName.setImageResource(R.drawable.loveu_not_selected_new);
+        loveuPrice.setImageResource(R.drawable.price_not_selected_new);
+
+        // Dino
+        dinoCardBg.setImageResource(R.drawable.card_base_not_selected_new);
+        dinoName.setImageResource(R.drawable.dino_not_selected_new);
+        dinoPrice.setImageResource(R.drawable.price_not_selected_new);
+
+        // Birthday Joy
+        bdayCardBg.setImageResource(R.drawable.card_base_not_selected_new);
+        bdayName.setImageResource(R.drawable.bdayjoy_not_selected_new);
+        bdayPrice.setImageResource(R.drawable.price_not_selected_new);
+    }
+
+    private void proceedToNextStep() {
+        // Only proceed if a balloon is selected
+        if (currentlySelected != null) {
+            // Get selected balloon type
+            String selectedBalloonType = getSelectedBalloonType();
+
+            // You can pass this information to the next activity or handle it as needed
+            // For example:
+            Intent intent = new Intent(BalloonSelection.this, PaymentActivity.class);
+            intent.putExtra("SELECTED_BALLOON", selectedBalloonType);
+            startActivity(intent);
         }
     }
 
-    // Helper method to write to a file
-    private void writeToFile(String fileName, String content) {
-        try (FileOutputStream fos = openFileOutput(fileName, Context.MODE_PRIVATE)) {
-            fos.write(content.getBytes());
-        } catch (IOException e) {
-            Log.e(TAG, "Error writing to file", e);
+    private String getSelectedBalloonType() {
+        if (currentlySelected == unicornContainer) {
+            return "unicorn";
+        } else if (currentlySelected == arielContainer) {
+            return "ariel";
+        } else if (currentlySelected == goodboyContainer) {
+            return "goodboy";
+        } else if (currentlySelected == loveuContainer) {
+            return "loveu";
+        } else if (currentlySelected == dinoContainer) {
+            return "dino";
+        } else if (currentlySelected == bdayContainer) {
+            return "bday";
         }
-    }
-
-    // Helper method to read from a file
-    private String readFromFile(String fileName) {
-        StringBuilder content = new StringBuilder();
-        try (FileInputStream fis = openFileInput(fileName)) {
-            int ch;
-            while ((ch = fis.read()) != -1) {
-                content.append((char) ch);
-            }
-        } catch (IOException e) {
-            Log.e(TAG, "Error reading from file", e);
-        }
-        return content.toString();
-    }
-
-    // Inner class to store balloon information
-    private static class BalloonInfo {
-        String id;
-        String name;
-        double price;
-        int imageResId;
-        int nameResId;
-        int priceResId;
-
-        BalloonInfo(String id, String name, double price, int imageResId, int nameResId, int priceResId) {
-            this.id = id;
-            this.name = name;
-            this.price = price;
-            this.imageResId = imageResId;
-            this.nameResId = nameResId;
-            this.priceResId = priceResId;
-        }
+        return "";
     }
 }

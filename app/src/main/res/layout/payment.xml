@@ -32,8 +32,8 @@
     <!-- Main content container with bottom margin to accommodate back button -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/content_container"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="1746dp"
+        android:layout_height="687dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
@@ -43,37 +43,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/menu_bar">
 
-    <!-- Left Card with balloon selection (narrower, more vertical) -->
-    <ImageView
-        android:id="@+id/card_base_left"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/card_base"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="3:5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.3" />
+        <!-- Left Card with balloon selection (narrower, more vertical) -->
 
-    <!-- Unicorn Image -->
+        <!-- Unicorn Image -->
 
         <!-- Total Amount -->
 
         <!-- Item List -->
+
+        <ImageView
+            android:id="@+id/card_base_left"
+            android:layout_width="517dp"
+            android:layout_height="781dp"
+            android:layout_marginStart="8dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/payment_card_balloon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="2:3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.085"
+            app:layout_constraintWidth_percent="0.3" />
+
         <ImageView
             android:id="@+id/unicorn_image"
-            android:layout_width="184dp"
-            android:layout_height="88dp"
+            android:layout_width="249dp"
+            android:layout_height="153dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="148dp"
             android:layout_marginEnd="16dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_launcher_foreground"
+            android:src="@drawable/puppy"
             app:layout_constraintEnd_toEndOf="@+id/card_base_left"
             app:layout_constraintHeight_percent="0.2"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.428"
             app:layout_constraintStart_toStartOf="@+id/card_base_left"
             app:layout_constraintTop_toTopOf="@+id/card_base_left" />
 
@@ -81,142 +85,150 @@
             android:id="@+id/total_amount"
             android:layout_width="89dp"
             android:layout_height="48dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="36dp"
             android:src="@drawable/price_selected_new"
             app:layout_constraintEnd_toEndOf="@+id/card_base_left"
-            app:layout_constraintHorizontal_bias="0.462"
+            app:layout_constraintHorizontal_bias="0.457"
             app:layout_constraintStart_toStartOf="@+id/card_base_left"
             app:layout_constraintTop_toBottomOf="@+id/unicorn_image" />
 
         <LinearLayout
-        android:id="@+id/item_list"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/card_base_left"
-        app:layout_constraintStart_toStartOf="@+id/card_base_left"
-        app:layout_constraintTop_toBottomOf="@+id/total_amount">
-
-            <ImageView
-                android:id="@+id/unicorn_item"
-                android:layout_width="104dp"
-                android:layout_height="14dp"
-                android:adjustViewBounds="true"
-                android:src="@drawable/unicorn_not_selected" />
-
-            <ImageView
-                android:id="@+id/good_boy_item"
-                android:layout_width="109dp"
-                android:layout_height="14dp"
-                android:layout_marginTop="4dp"
-                android:adjustViewBounds="true"
-                android:src="@drawable/goodboy_not_selected_new" />
-
-            <ImageView
-                android:id="@+id/dino_item"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:adjustViewBounds="true"
-                android:src="@drawable/dino_not_selected_new" />
-    </LinearLayout>
-
-    <!-- Right Card with payment methods (wider) -->
-    <ImageView
-        android:id="@+id/payment_background"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="24dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/background_payment"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/card_base_left"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- Select your payment method text -->
-    <ImageView
-        android:id="@+id/select_payment_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:adjustViewBounds="true"
-        android:src="@drawable/select_payment_method"
-        app:layout_constraintEnd_toEndOf="@+id/payment_background"
-        app:layout_constraintStart_toStartOf="@+id/payment_background"
-        app:layout_constraintTop_toTopOf="@+id/payment_background" />
-
-    <!-- Payment Methods Container -->
-    <LinearLayout
-        android:id="@+id/payment_methods_container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:orientation="horizontal"
-        android:weightSum="3"
-        app:layout_constraintEnd_toEndOf="@+id/payment_background"
-        app:layout_constraintStart_toStartOf="@+id/payment_background"
-        app:layout_constraintTop_toBottomOf="@+id/select_payment_text">
-
-        <!-- Credit Card Option -->
-        <FrameLayout
-            android:layout_width="8dp"
+            android:id="@+id/item_list"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <ImageView
-                android:id="@+id/credit_card_option"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:padding="8dp"
-                android:src="@drawable/credit_card" />
-        </FrameLayout>
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="@+id/card_base_left"
+            app:layout_constraintStart_toStartOf="@+id/card_base_left"
+            app:layout_constraintTop_toBottomOf="@+id/total_amount">
 
-        <!-- Coin Option -->
-        <FrameLayout
-            android:layout_width="8dp"
+        </LinearLayout>
+
+        <!-- Right Card with payment methods (wider) -->
+        <ImageView
+            android:id="@+id/payment_background"
+            android:layout_width="1227dp"
+            android:layout_height="706dp"
+            android:layout_marginStart="24dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/background_payment"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/card_base_left"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Select your payment method text -->
+        <ImageView
+            android:id="@+id/select_payment_text"
+            android:layout_width="1113dp"
+            android:layout_height="115dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/select_payment_method"
+            app:layout_constraintEnd_toEndOf="@+id/payment_background"
+            app:layout_constraintStart_toStartOf="@+id/payment_background"
+            app:layout_constraintTop_toTopOf="@+id/payment_background" />
+
+        <!-- Payment Methods Container -->
+        <LinearLayout
+            android:id="@+id/payment_methods_container"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <ImageView
-                android:id="@+id/coin_option"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:padding="8dp"
-                android:src="@drawable/coin" />
-        </FrameLayout>
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            app:layout_constraintEnd_toEndOf="@+id/payment_background"
+            app:layout_constraintStart_toStartOf="@+id/payment_background"
+            app:layout_constraintTop_toBottomOf="@+id/select_payment_text">
 
-        <!-- Cash Option -->
-        <FrameLayout
-            android:layout_width="8dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <ImageView
-                android:id="@+id/cash_option"
-                android:layout_width="match_parent"
+            <!-- Credit Card Option -->
+            <FrameLayout
+                android:layout_width="8dp"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:padding="8dp"
-                android:src="@drawable/cash" />
-        </FrameLayout>
-    </LinearLayout>
+                android:layout_weight="1">
 
-    <!-- Payment Successful Message -->
+                <ImageView
+                    android:id="@+id/credit_card_option"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:padding="8dp"
+                    android:src="@drawable/credit_card" />
+            </FrameLayout>
+
+            <!-- Coin Option -->
+            <FrameLayout
+                android:layout_width="8dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/coin_option"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:padding="8dp"
+                    android:src="@drawable/coin" />
+            </FrameLayout>
+
+            <!-- Cash Option -->
+            <FrameLayout
+                android:layout_width="8dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/cash_option"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:padding="8dp"
+                    android:src="@drawable/cash" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <!-- Payment Successful Message -->
         <ImageView
             android:id="@+id/payment_successful"
-            android:layout_width="507dp"
-            android:layout_height="22dp"
+            android:layout_width="708dp"
+            android:layout_height="109dp"
             android:src="@drawable/payment_successful"
             app:layout_constraintEnd_toEndOf="@+id/payment_background"
             app:layout_constraintStart_toStartOf="@+id/payment_background"
             app:layout_constraintTop_toBottomOf="@+id/payment_methods_container" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/dino_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/dino_not_selected_new"
+            tools:layout_editor_absoluteX="230dp"
+            tools:layout_editor_absoluteY="510dp" />
+
+        <ImageView
+            android:id="@+id/good_boy_item"
+            android:layout_width="109dp"
+            android:layout_height="14dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/goodboy_not_selected_new"
+            tools:layout_editor_absoluteX="214dp"
+            tools:layout_editor_absoluteY="471dp" />
+
+        <ImageView
+            android:id="@+id/unicorn_item"
+            android:layout_width="104dp"
+            android:layout_height="14dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/unicorn_not_selected"
+            tools:layout_editor_absoluteX="189dp"
+            tools:layout_editor_absoluteY="432dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

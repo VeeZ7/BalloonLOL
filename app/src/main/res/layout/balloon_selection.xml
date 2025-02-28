@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,110 +9,95 @@
     <!-- Top menu bar -->
     <ImageView
         android:id="@+id/menu_bar"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
-        android:src="@drawable/menu_bar_1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:src="@drawable/menu_bar_2_payment"
+        android:layout_alignParentTop="true" />
 
     <!-- Grid layout for balloon options with increased spacing -->
-
-    <!-- Navigation buttons - made smaller -->
-
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/balloon_grid"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginStart="12dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="12dp"
+        android:layout_below="@+id/menu_bar"
+        android:layout_above="@+id/navigation_buttons"
         app:columnCount="3"
-        app:layout_constraintBottom_toTopOf="@+id/back_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menu_bar"
-        app:layout_constraintVertical_bias="1.0"
         app:rowCount="2">
 
-        <!-- Unicorn Balloon Button -->
+
         <FrameLayout
             android:id="@+id/unicorn_container"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="10dp"
             app:layout_columnWeight="1"
-            app:layout_constraintDimensionRatio="1:1"
             app:layout_rowWeight="1">
 
-            <ImageView
-                android:id="@+id/unicorn_card_bg"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitXY"
-                android:src="@drawable/card_base_not_selected_new" />
+                android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/unicorn_button"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true">
+                <ImageView
+                    android:id="@+id/unicorn_card_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/card_base_not_selected_new"
+                    android:clipChildren="true"
+                    android:clipToPadding="true"/>
 
                 <ImageView
                     android:id="@+id/unicorn_image"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="12dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="4dp"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_launcher_foreground"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.35" />
+                    android:src="@drawable/unicorn"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true" />
 
-                <ImageView
-                    android:id="@+id/unicorn_name"
-                    android:layout_width="77dp"
-                    android:layout_height="36dp"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="8dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/unicorn_not_selected_new"
-                    app:layout_constraintBottom_toTopOf="@+id/unicorn_price"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHeight_percent="0.3"
-                    app:layout_constraintStart_toEndOf="@+id/unicorn_image"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="packed" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@id/unicorn_image"
+                    android:orientation="vertical"
+                    android:gravity="center">
 
-                <ImageView
-                    android:id="@+id/unicorn_price"
-                    android:layout_width="78dp"
-                    android:layout_height="34dp"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="8dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/price_not_selected_new"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHeight_percent="0.3"
-                    app:layout_constraintStart_toEndOf="@+id/unicorn_image"
-                    app:layout_constraintTop_toBottomOf="@+id/unicorn_name"
-                    app:layout_constraintVertical_bias="0.2" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageView
+                        android:id="@+id/unicorn_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="12dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/unicorn_not_selected_new" />
+
+                    <ImageView
+                        android:id="@+id/unicorn_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="12dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/price_not_selected_new" />
+                </LinearLayout>
+            </RelativeLayout>
         </FrameLayout>
 
-        <!-- Ariel Balloon Button - with more square background and increased margins -->
+        <!-- Ariel Balloon Button -->
         <FrameLayout
             android:id="@+id/ariel_container"
             android:layout_width="0dp"
@@ -121,70 +106,66 @@
             app:layout_columnWeight="1"
             app:layout_rowWeight="1">
 
-            <ImageView
-                android:id="@+id/ariel_card_bg"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitXY"
-                android:src="@drawable/card_base_not_selected_new" />
+                android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/ariel_button"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true">
+                <ImageView
+                    android:id="@+id/ariel_card_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/card_base_not_selected_new"
+                    android:clipChildren="true"
+                    android:clipToPadding="true"/>
 
                 <ImageView
                     android:id="@+id/ariel_image"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="4dp"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_launcher_foreground"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.38" />
+                    android:src="@drawable/mermaid"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true" />
 
-                <ImageView
-                    android:id="@+id/ariel_name"
-                    android:layout_width="62dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="12dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ariel_not_selected_new"
-                    app:layout_constraintBottom_toTopOf="@+id/ariel_price"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHeight_percent="0.35"
-                    app:layout_constraintStart_toEndOf="@+id/ariel_image"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="packed" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@id/ariel_image"
+                    android:orientation="vertical"
+                    android:gravity="center">
 
-                <ImageView
-                    android:id="@+id/ariel_price"
-                    android:layout_width="55dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="12dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/price_not_selected_new"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHeight_percent="0.35"
-                    app:layout_constraintStart_toEndOf="@+id/ariel_image"
-                    app:layout_constraintTop_toBottomOf="@+id/ariel_name" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageView
+                        android:id="@+id/ariel_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="12dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ariel_not_selected_new" />
+
+                    <ImageView
+                        android:id="@+id/ariel_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="12dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/price_not_selected_new" />
+                </LinearLayout>
+            </RelativeLayout>
         </FrameLayout>
 
-        <!-- Good Boy Balloon Button - with more square background and increased margins -->
+        <!-- Good Boy Balloon Button -->
         <FrameLayout
             android:id="@+id/goodboy_container"
             android:layout_width="0dp"
@@ -193,70 +174,66 @@
             app:layout_columnWeight="1"
             app:layout_rowWeight="1">
 
-            <ImageView
-                android:id="@+id/goodboy_card_bg"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitXY"
-                android:src="@drawable/card_base_not_selected_new" />
+                android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/goodboy_button"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true">
+                <ImageView
+                    android:id="@+id/goodboy_card_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/card_base_not_selected_new"
+                    android:clipChildren="true"
+                    android:clipToPadding="true"/>
 
                 <ImageView
                     android:id="@+id/goodboy_image"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="4dp"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_launcher_foreground"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.38" />
+                    android:src="@drawable/puppy"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true" />
 
-                <ImageView
-                    android:id="@+id/goodboy_name"
-                    android:layout_width="72dp"
-                    android:layout_height="27dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="12dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/goodboy_not_selected_new"
-                    app:layout_constraintBottom_toTopOf="@+id/goodboy_price"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHeight_percent="0.35"
-                    app:layout_constraintStart_toEndOf="@+id/goodboy_image"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="packed" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@id/goodboy_image"
+                    android:orientation="vertical"
+                    android:gravity="center">
 
-                <ImageView
-                    android:id="@+id/goodboy_price"
-                    android:layout_width="84dp"
-                    android:layout_height="36dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="12dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/price_not_selected_new"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHeight_percent="0.35"
-                    app:layout_constraintStart_toEndOf="@+id/goodboy_image"
-                    app:layout_constraintTop_toBottomOf="@+id/goodboy_name" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageView
+                        android:id="@+id/goodboy_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="12dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/goodboy_not_selected_new" />
+
+                    <ImageView
+                        android:id="@+id/goodboy_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="12dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/price_not_selected_new" />
+                </LinearLayout>
+            </RelativeLayout>
         </FrameLayout>
 
-        <!-- Love U Balloon Button - with more square background and increased margins -->
+        <!-- Love U Balloon Button -->
         <FrameLayout
             android:id="@+id/loveu_container"
             android:layout_width="0dp"
@@ -265,70 +242,66 @@
             app:layout_columnWeight="1"
             app:layout_rowWeight="1">
 
-            <ImageView
-                android:id="@+id/loveu_card_bg"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitXY"
-                android:src="@drawable/card_base_not_selected_new" />
+                android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/loveu_button"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true">
+                <ImageView
+                    android:id="@+id/loveu_card_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/card_base_not_selected_new"
+                    android:clipChildren="true"
+                    android:clipToPadding="true"/>
 
                 <ImageView
                     android:id="@+id/loveu_image"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="4dp"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_launcher_foreground"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.38" />
+                    android:src="@drawable/heart"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true" />
 
-                <ImageView
-                    android:id="@+id/loveu_name"
-                    android:layout_width="69dp"
-                    android:layout_height="46dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="12dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/loveu_not_selected_new"
-                    app:layout_constraintBottom_toTopOf="@+id/loveu_price"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHeight_percent="0.35"
-                    app:layout_constraintStart_toEndOf="@+id/loveu_image"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="packed" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@id/loveu_image"
+                    android:orientation="vertical"
+                    android:gravity="center">
 
-                <ImageView
-                    android:id="@+id/loveu_price"
-                    android:layout_width="69dp"
-                    android:layout_height="34dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="12dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/price_not_selected_new"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHeight_percent="0.35"
-                    app:layout_constraintStart_toEndOf="@+id/loveu_image"
-                    app:layout_constraintTop_toBottomOf="@+id/loveu_name" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageView
+                        android:id="@+id/loveu_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="12dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/loveu_not_selected_new" />
+
+                    <ImageView
+                        android:id="@+id/loveu_price"
+                        android:layout_width="253dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="12dp"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/price_not_selected_new" />
+                </LinearLayout>
+            </RelativeLayout>
         </FrameLayout>
 
-        <!-- Dino Balloon Button - with more square background and increased margins -->
+        <!-- Dino Balloon Button -->
         <FrameLayout
             android:id="@+id/dino_container"
             android:layout_width="0dp"
@@ -337,70 +310,66 @@
             app:layout_columnWeight="1"
             app:layout_rowWeight="1">
 
-            <ImageView
-                android:id="@+id/dino_card_bg"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitXY"
-                android:src="@drawable/card_base_not_selected_new" />
+                android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/dino_button"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true">
+                <ImageView
+                    android:id="@+id/dino_card_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/card_base_not_selected_new"
+                    android:clipChildren="true"
+                    android:clipToPadding="true"/>
 
                 <ImageView
                     android:id="@+id/dino_image"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="4dp"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_launcher_foreground"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.38" />
+                    android:src="@drawable/dino"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true" />
 
-                <ImageView
-                    android:id="@+id/dino_name"
-                    android:layout_width="49dp"
-                    android:layout_height="38dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="12dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/dino_not_selected_new"
-                    app:layout_constraintBottom_toTopOf="@+id/dino_price"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHeight_percent="0.35"
-                    app:layout_constraintStart_toEndOf="@+id/dino_image"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="packed" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@id/dino_image"
+                    android:orientation="vertical"
+                    android:gravity="center">
 
-                <ImageView
-                    android:id="@+id/dino_price"
-                    android:layout_width="58dp"
-                    android:layout_height="41dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="12dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/price_not_selected_new"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHeight_percent="0.35"
-                    app:layout_constraintStart_toEndOf="@+id/dino_image"
-                    app:layout_constraintTop_toBottomOf="@+id/dino_name" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageView
+                        android:id="@+id/dino_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="12dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/dino_not_selected_new" />
+
+                    <ImageView
+                        android:id="@+id/dino_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="12dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/price_not_selected_new" />
+                </LinearLayout>
+            </RelativeLayout>
         </FrameLayout>
 
-        <!-- Birthday Joy Balloon Button - with more square background and increased margins -->
+        <!-- Birthday Joy Balloon Button -->
         <FrameLayout
             android:id="@+id/bday_container"
             android:layout_width="0dp"
@@ -409,101 +378,100 @@
             app:layout_columnWeight="1"
             app:layout_rowWeight="1">
 
-            <ImageView
-                android:id="@+id/bday_card_bg"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitXY"
-                android:src="@drawable/card_base_not_selected_new" />
+                android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/bday_button"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true">
+                <ImageView
+                    android:id="@+id/bday_card_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/card_base_not_selected_new"
+                    android:clipChildren="true"
+                    android:clipToPadding="true"/>
 
                 <ImageView
                     android:id="@+id/bday_image"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="4dp"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_launcher_foreground"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintWidth_percent="0.38" />
+                    android:src="@drawable/birthday"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true" />
 
-                <ImageView
-                    android:id="@+id/bday_name"
-                    android:layout_width="62dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="12dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/bdayjoy_not_selected_new"
-                    app:layout_constraintBottom_toTopOf="@+id/bday_price"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHeight_percent="0.35"
-                    app:layout_constraintStart_toEndOf="@+id/bday_image"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="packed" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toEndOf="@id/bday_image"
+                    android:orientation="vertical"
+                    android:gravity="center">
 
-                <ImageView
-                    android:id="@+id/bday_price"
-                    android:layout_width="45dp"
-                    android:layout_height="41dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="12dp"
-                    android:adjustViewBounds="true"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/price_not_selected_new"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHeight_percent="0.35"
-                    app:layout_constraintStart_toEndOf="@+id/bday_image"
-                    app:layout_constraintTop_toBottomOf="@+id/bday_name" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageView
+                        android:id="@+id/bday_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="12dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/bdayjoy_not_selected_new" />
+
+                    <ImageView
+                        android:id="@+id/bday_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="12dp"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/price_not_selected_new" />
+                </LinearLayout>
+            </RelativeLayout>
         </FrameLayout>
-
     </androidx.gridlayout.widget.GridLayout>
 
-    <ImageButton
-        android:id="@+id/back_button"
-        android:layout_width="43dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginBottom="16dp"
-        android:adjustViewBounds="true"
-        android:background="@android:color/transparent"
-        android:contentDescription="Back"
-        android:scaleType="fitCenter"
-        android:src="@drawable/back_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="w,1:1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.12" />
+    <!-- Navigation buttons container -->
+    <RelativeLayout
+        android:id="@+id/navigation_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp">
 
-    <ImageButton
-        android:id="@+id/continue_button"
-        android:layout_width="171dp"
-        android:layout_height="90dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="16dp"
-        android:adjustViewBounds="true"
-        android:background="@android:color/transparent"
-        android:contentDescription="Continue"
-        android:scaleType="fitCenter"
-        android:src="@drawable/button_continue"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="w,1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.12" />
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:contentDescription="Back"
+            android:scaleType="fitCenter"
+            android:src="@drawable/back_button"
+            android:layout_alignParentStart="true"
+            android:clipChildren="true"
+            android:clipToPadding="true"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageButton
+            android:id="@+id/continue_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="28dp"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:contentDescription="Continue"
+            android:scaleType="fitCenter"
+            android:src="@drawable/button_continue"
+            android:layout_alignParentEnd="true"
+            android:clipChildren="true"
+            android:clipToPadding="true"/>
+    </RelativeLayout>
+</RelativeLayout>
