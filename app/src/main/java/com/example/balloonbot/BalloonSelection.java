@@ -212,13 +212,13 @@ public class BalloonSelection extends AppCompatActivity implements View.OnClickL
             // Get selected balloon type
             String selectedBalloonType = getSelectedBalloonType();
 
-            showFinishVideo(selectedBalloonType);
+            //showFinishVideo(selectedBalloonType);
 
             // You can pass this information to the next activity or handle it as needed
             // For example:
-//            Intent intent = new Intent(BalloonSelection.this, PaymentActivity.class);
-//            intent.putExtra("SELECTED_BALLOON", selectedBalloonType);
-//            startActivity(intent);
+            Intent intent = new Intent(BalloonSelection.this, PaymentActivity.class);
+            intent.putExtra("SELECTED_BALLOON", selectedBalloonType);
+            startActivity(intent);
         }
     }
 

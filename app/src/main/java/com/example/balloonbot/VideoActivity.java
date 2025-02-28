@@ -30,16 +30,19 @@ public class VideoActivity extends AppCompatActivity {
         String videoPath = "android.resource://" + getPackageName() + "/" + R.raw.start_video;
         customVideo.setVideoURI(Uri.parse(videoPath));
 
-        // Start playing the video
-        customVideo.start();
-
-        // Set a listener for when the video completes
+        // Set looping to true so video continues playing
         customVideo.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
-                navigateToBalloonSelection();
+                // If not touched, restart the video to create a loop
+                if (!isTouched) {
+                    customVideo.start();
+                }
             }
         });
+
+        // Start playing the video
+        customVideo.start();
 
         // Set up touch listener to detect user interaction
         customVideo.setOnTouchListener(new View.OnTouchListener() {
@@ -48,8 +51,11 @@ public class VideoActivity extends AppCompatActivity {
                 if (isTouched) return false;  // Prevent repeat action
 
                 if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    customVideo.seekTo(customVideo.getDuration());
-                    isTouched = true;  // Mark that the touch event has been handled
+                    // Set the touched flag to true
+                    isTouched = true;
+
+                    // Navigate immediately rather than waiting for the video to end
+                    navigateToBalloonSelection();
                 }
                 view.performClick();  // Ensure accessibility
                 return true;
@@ -80,7 +86,7 @@ public class VideoActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (!customVideo.isPlaying()) {
+        if (!customVideo.isPlaying() && !isTouched) {
             customVideo.start();
         }
     }
